@@ -184,7 +184,7 @@ export default function Home() {
           <h2>Less hunting through portals.<br /><span>More answers from data.</span></h2>
           <div className="two-col-copy">
             <p>A vast amount of public data is available, but getting from a question to an answer often means searching unfamiliar catalogues, decoding spreadsheets and figuring out which resource is current.</p>
-            <p>opendata.fyi gives your AI assistant the tools to handle that work. Ask in plain English; it finds relevant datasets, inspects their structure, queries useful rows and shows where the information came from.</p>
+            <p>opendata.fyi gives your AI assistant the tools to handle that work.</p>
           </div>
         </div>
       </section>
@@ -257,7 +257,7 @@ export default function Home() {
         <p className="section-kicker">Under the hood</p>
         <div className="technical-copy">
           <h2>Open-source<br /><span>MCP server.</span></h2>
-          <p>The server builds a local semantic index by encoding dataset metadata into 384-dimensional vectors with bge-small-en-v1.5 and storing them in a DuckDB database. For every query, it runs a hybrid search: local semantic search in DuckDB alongside CKAN’s live package_search API. Results are merged using Reciprocal Rank Fusion (RRF) to rank the most relevant datasets.</p>
+          <p>opendata.fyi builds a semantic index by encoding dataset metadata into 384-dimensional vectors with bge-small-en-v1.5 and storing them in a DuckDB database. For every query, it runs a hybrid search: local semantic search in DuckDB alongside CKAN’s live package_search API. Results are merged using Reciprocal Rank Fusion (RRF) to rank the most relevant datasets.</p>
           <p>For retrieval, the server routes queries through the most efficient read-only execution path. Datastore-backed tables are filtered server-side through CKAN, while remote files are queried with DuckDB or handled with format-specific readers. Only targeted results are returned to your MCP client for downstream analysis, visualization and synthesis.</p>
         </div>
       </section>
