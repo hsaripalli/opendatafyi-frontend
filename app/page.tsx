@@ -49,37 +49,28 @@ export default function Home() {
   const [workflowLine, setWorkflowLine] = useState(0);
   const [workflowChar, setWorkflowChar] = useState(0);
   const [showWorkflowSource, setShowWorkflowSource] = useState(false);
-  const [workflowInView, setWorkflowInView] = useState(false);
   const workflowCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const card = workflowCardRef.current;
-    if (!card || !("IntersectionObserver" in window)) {
-      setWorkflowInView(true);
-      return;
-    }
-
-    // Fallback timer for mobile browsers where IntersectionObserver may be delayed
-    const fallbackTimer = setTimeout(() => setWorkflowInView(true), 1000);
+    if (!card || !("IntersectionObserver" in window)) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setWorkflowInView(true);
+          setWorkflowLine(0);
+          setWorkflowChar(0);
+          setShowWorkflowSource(false);
+          observer.disconnect();
         }
       },
-      { threshold: 0.05, rootMargin: "100px" },
+      { threshold: 0 },
     );
     observer.observe(card);
-    return () => {
-      clearTimeout(fallbackTimer);
-      observer.disconnect();
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    if (!workflowInView) return;
-
     let timer: ReturnType<typeof setTimeout>;
     if (workflowLine < workflowLines.length) {
       const currentLine = workflowLines[workflowLine];
@@ -102,7 +93,7 @@ export default function Home() {
     }
 
     return () => clearTimeout(timer);
-  }, [showWorkflowSource, workflowChar, workflowInView, workflowLine]);
+  }, [showWorkflowSource, workflowChar, workflowLine]);
 
   const typedWorkflowLine = (index: number) => {
     if (index < workflowLine) return workflowLines[index];
