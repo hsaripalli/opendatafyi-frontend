@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import brandLogo from "../opendata-fyi-original-dots-logo-pack/opendata-logo-original-transparent.png";
 
 const github = "https://github.com/opendatafyi/openmcp";
@@ -36,7 +36,11 @@ const faq = [
 ];
 
 function Arrow() {
-  return <span aria-hidden="true">↗</span>;
+  return (
+    <svg className="arrow-icon" viewBox="0 0 16 16" aria-hidden="true">
+      <path d="M4 12 12 4M6 4h6v6" />
+    </svg>
+  );
 }
 
 export default function Home() {
@@ -45,18 +49,36 @@ export default function Home() {
   const [workflowLine, setWorkflowLine] = useState(0);
   const [workflowChar, setWorkflowChar] = useState(0);
   const [showWorkflowSource, setShowWorkflowSource] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [workflowInView, setWorkflowInView] = useState(false);
+  const workflowCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updatePreference = () => setReducedMotion(preference.matches);
-    updatePreference();
-    preference.addEventListener("change", updatePreference);
-    return () => preference.removeEventListener("change", updatePreference);
+    const card = workflowCardRef.current;
+    if (!card || !("IntersectionObserver" in window)) {
+      setWorkflowInView(true);
+      return;
+    }
+
+    // Fallback timer for mobile browsers where IntersectionObserver may be delayed
+    const fallbackTimer = setTimeout(() => setWorkflowInView(true), 1000);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setWorkflowInView(true);
+        }
+      },
+      { threshold: 0.05, rootMargin: "100px" },
+    );
+    observer.observe(card);
+    return () => {
+      clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
   }, []);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (!workflowInView) return;
 
     let timer: ReturnType<typeof setTimeout>;
     if (workflowLine < workflowLines.length) {
@@ -80,10 +102,10 @@ export default function Home() {
     }
 
     return () => clearTimeout(timer);
-  }, [reducedMotion, showWorkflowSource, workflowChar, workflowLine]);
+  }, [showWorkflowSource, workflowChar, workflowInView, workflowLine]);
 
   const typedWorkflowLine = (index: number) => {
-    if (reducedMotion || index < workflowLine) return workflowLines[index];
+    if (index < workflowLine) return workflowLines[index];
     if (index === workflowLine) return workflowLines[index].slice(0, workflowChar);
     return "";
   };
@@ -109,8 +131,8 @@ export default function Home() {
           <p className="eyebrow"><i />A context layer for Canadian public data</p>
           <h1>Explore<br /><span>open data.</span></h1>
           <p className="lede">
-            Connect your AI assistant to 24,000+ public datasets. Find and query
-            datasets, build charts, visuals,
+            Connect your AI assistant to 24,000+ public datasets. Find the right
+            sources, query the data, and build charts, visuals,
             reports and stories—all traceable to the official source.
           </p>
           <div className="actions">
@@ -121,7 +143,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="demo-card" aria-label="opendata.fyi example workflow">
+        <div ref={workflowCardRef} className="demo-card" aria-label="opendata.fyi example workflow">
           <div className="demo-top">
             <span>LIVE WORKFLOW</span>
             <span className="live">
@@ -132,26 +154,26 @@ export default function Home() {
             <span className="prompt-icon">→</span>
             <p aria-hidden="true">
               {typedWorkflowLine(0)}
-              {!reducedMotion && workflowLine === 0 && <span className="typing-cursor">▌</span>}
+              {workflowLine === 0 && <span className="typing-cursor">▌</span>}
             </p>
           </div>
           <div className="workflow">
             {workflowSteps.map(([label, value], index) => (
               <div className="workflow-row" aria-label={`${label}: ${value}`} key={label}>
-                <span className={`workflow-index ${!reducedMotion && workflowLine < index + 1 ? "is-hidden" : ""}`}>
+                <span className={`workflow-index ${workflowLine < index + 1 ? "is-hidden" : ""}`}>
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <span className="workflow-label" aria-hidden="true">
                   {typedWorkflowLine(index + 1)}
-                  {!reducedMotion && workflowLine === index + 1 && <span className="typing-cursor">▌</span>}
+                  {workflowLine === index + 1 && <span className="typing-cursor">▌</span>}
                 </span>
-                <span className={`${index === 3 ? "ready " : ""}${!reducedMotion && workflowLine <= index + 1 ? "is-hidden" : ""}`}>
+                <span className={`${index === 3 ? "ready " : ""}${workflowLine <= index + 1 ? "is-hidden" : ""}`}>
                   {value}
                 </span>
               </div>
             ))}
           </div>
-          <div className={`demo-footer ${reducedMotion || showWorkflowSource ? "is-visible" : ""}`}>
+          <div className={`demo-footer ${showWorkflowSource ? "is-visible" : ""}`}>
             <span>Official housing dataset</span>
             <span className="source-url">open.canada.ca/data/en/dataset/324befd1-893b-42e6-bece-6d30af3dd9f1</span>
           </div>
