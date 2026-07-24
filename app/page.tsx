@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import brandLogo from "../opendata-fyi-original-dots-logo-pack/opendata-logo-original-transparent.png";
 
 const github = "https://github.com/opendatafyi/openmcp";
 
@@ -12,6 +14,15 @@ const prompts = [
   "Find recent data on greenhouse gas emissions by sector.",
   "Which neighbourhoods in Toronto report the worst air quality?",
 ];
+
+const workflowQuestion = "How do interest rates affect housing prices in Canada?";
+const workflowSteps = [
+  ["Searching the catalogue", "24,000+ datasets"],
+  ["Comparing relevant sources", "12 candidates"],
+  ["Querying source data", "3 datasets"],
+  ["Generating chart", "Chart ready"],
+] as const;
+const workflowLines = [workflowQuestion, ...workflowSteps.map(([label]) => label)];
 
 const faq = [
   ["What is opendata.fyi?", "A project that helps AI assistants discover and query public datasets published through open.canada.ca (with more sources coming soon). It is powered by the open-source openmcp server."],
@@ -31,12 +42,57 @@ function Arrow() {
 export default function Home() {
   const [activePrompt, setActivePrompt] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [workflowLine, setWorkflowLine] = useState(0);
+  const [workflowChar, setWorkflowChar] = useState(0);
+  const [showWorkflowSource, setShowWorkflowSource] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updatePreference = () => setReducedMotion(preference.matches);
+    updatePreference();
+    preference.addEventListener("change", updatePreference);
+    return () => preference.removeEventListener("change", updatePreference);
+  }, []);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+
+    let timer: ReturnType<typeof setTimeout>;
+    if (workflowLine < workflowLines.length) {
+      const currentLine = workflowLines[workflowLine];
+      if (workflowChar < currentLine.length) {
+        timer = setTimeout(() => setWorkflowChar((value) => value + 1), 34);
+      } else {
+        timer = setTimeout(() => {
+          setWorkflowLine((value) => value + 1);
+          setWorkflowChar(0);
+        }, workflowLine === 0 ? 650 : 420);
+      }
+    } else if (!showWorkflowSource) {
+      timer = setTimeout(() => setShowWorkflowSource(true), 450);
+    } else {
+      timer = setTimeout(() => {
+        setWorkflowLine(0);
+        setWorkflowChar(0);
+        setShowWorkflowSource(false);
+      }, 2400);
+    }
+
+    return () => clearTimeout(timer);
+  }, [reducedMotion, showWorkflowSource, workflowChar, workflowLine]);
+
+  const typedWorkflowLine = (index: number) => {
+    if (reducedMotion || index < workflowLine) return workflowLines[index];
+    if (index === workflowLine) return workflowLines[index].slice(0, workflowChar);
+    return "";
+  };
 
   return (
     <main>
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="opendata.fyi home">
-          <span className="mark">O</span> opendata.fyi
+          <Image className="brand-logo" src={brandLogo} alt="opendata.fyi" priority />
         </a>
         <nav aria-label="Main navigation">
           <a href="#how">How it works</a>
@@ -50,8 +106,8 @@ export default function Home() {
 
       <section className="hero" id="top">
         <div className="hero-copy">
-          <p className="eyebrow"><i />A context layer for public data</p>
-          <h1>Explore<br /><span>Canadian open data.</span></h1>
+          <p className="eyebrow"><i />A context layer for Canadian public data</p>
+          <h1>Explore<br /><span>open data.</span></h1>
           <p className="lede">
             Connect your AI assistant to 24,000+ public datasets. Find and query
             datasets, build charts, visuals,
@@ -68,27 +124,34 @@ export default function Home() {
         <div className="demo-card" aria-label="opendata.fyi example workflow">
           <div className="demo-top">
             <span>LIVE WORKFLOW</span>
-            <span className="live"><i /> OPENDATA.FYI</span>
+            <span className="live">
+              <Image className="workflow-logo" src={brandLogo} alt="opendata.fyi" />
+            </span>
           </div>
-          <div className="prompt">
+          <div className="prompt" aria-label={workflowQuestion}>
             <span className="prompt-icon">→</span>
-            <p>How do interest rates affect housing prices in Canada?</p>
+            <p aria-hidden="true">
+              {typedWorkflowLine(0)}
+              {!reducedMotion && workflowLine === 0 && <span className="typing-cursor">▌</span>}
+            </p>
           </div>
           <div className="workflow">
-            {[
-              ["Searching the catalogue", "24,000+ datasets"],
-              ["Comparing relevant sources", "12 candidates"],
-              ["Querying source data", "3 datasets"],
-              ["Building answer with links", "Ready"],
-            ].map(([label, value], index) => (
-              <div className="workflow-row" key={label}>
-                <span className="workflow-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="workflow-label">{label}</span>
-                <span className={index === 3 ? "ready" : ""}>{value}</span>
+            {workflowSteps.map(([label, value], index) => (
+              <div className="workflow-row" aria-label={`${label}: ${value}`} key={label}>
+                <span className={`workflow-index ${!reducedMotion && workflowLine < index + 1 ? "is-hidden" : ""}`}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="workflow-label" aria-hidden="true">
+                  {typedWorkflowLine(index + 1)}
+                  {!reducedMotion && workflowLine === index + 1 && <span className="typing-cursor">▌</span>}
+                </span>
+                <span className={`${index === 3 ? "ready " : ""}${!reducedMotion && workflowLine <= index + 1 ? "is-hidden" : ""}`}>
+                  {value}
+                </span>
               </div>
             ))}
           </div>
-          <div className="demo-footer">
+          <div className={`demo-footer ${reducedMotion || showWorkflowSource ? "is-visible" : ""}`}>
             <span>Official housing dataset</span>
             <span className="source-url">open.canada.ca/data/en/dataset/324befd1-893b-42e6-bece-6d30af3dd9f1</span>
           </div>
@@ -239,14 +302,16 @@ export default function Home() {
 
       <footer>
         <div className="footer-brand">
-          <a className="wordmark" href="#top"><span className="mark">O</span> opendata.fyi</a>
+          <a className="wordmark" href="#top" aria-label="opendata.fyi home">
+            <Image className="brand-logo" src={brandLogo} alt="opendata.fyi" />
+          </a>
           <p>AI-assisted discovery, querying and analysis for public data.</p>
         </div>
         <div className="footer-links">
-          <a href={github}>GitHub ↗</a>
-          <a href={`${github}#quick-start`}>Documentation ↗</a>
-          <a href={`${github}/releases/latest`}>Releases ↗</a>
-          <a href="https://open.canada.ca/en/open-data">open.canada.ca ↗</a>
+          <a href={github}>GitHub</a>
+          <a href={`${github}#quick-start`}>Documentation</a>
+          <a href={`${github}/releases/latest`}>Releases</a>
+          <a href="https://open.canada.ca/en/open-data">open.canada.ca</a>
         </div>
         <div className="footer-bottom">
           <span>© 2026 opendata.fyi · openmcp is MIT licensed</span>

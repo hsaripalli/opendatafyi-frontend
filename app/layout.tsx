@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import favicon16 from "../opendata-fyi-original-dots-logo-pack/favicon-16.png";
+import favicon32 from "../opendata-fyi-original-dots-logo-pack/favicon-32.png";
+import appleTouchIcon from "../opendata-fyi-original-dots-logo-pack/apple-touch-icon.png";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,21 +16,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "opendata.fyi — Explore Canadian open data",
-  description:
-    "Explore 24,000+ Canadian public datasets with your AI assistant. Discover, query, analyze, and trace results back to the source.",
+  title: "opendata.fyi — Explore open data",
+  description: "Explore open data.",
   openGraph: {
-    title: "opendata.fyi — Canadian open data for your AI assistant",
-    description:
-      "opendata.fyi helps AI assistants find and query public datasets, then turn the results into traceable answers and artifacts.",
+    title: "opendata.fyi — Explore open data",
+    description: "Explore open data.",
     type: "website",
   },
   other: {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: [
+      { url: favicon16.src, sizes: "16x16", type: "image/png" },
+      { url: favicon32.src, sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: favicon32.src,
+    apple: [
+      { url: appleTouchIcon.src, sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
