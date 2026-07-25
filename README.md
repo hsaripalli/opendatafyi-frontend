@@ -1,6 +1,6 @@
 # opendata.fyi website
 
-Editable Next.js source for opendata.fyi, powered by the OpenMCP server.
+Editable Next.js source for the opendata.fyi website.
 
 ## Run locally
 

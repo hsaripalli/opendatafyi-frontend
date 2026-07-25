@@ -25,14 +25,14 @@ const workflowSteps = [
 const workflowLines = [workflowQuestion, ...workflowSteps.map(([label]) => label)];
 
 const faq = [
-  ["What is opendata.fyi?", "A project that helps AI assistants discover and query public datasets published through open.canada.ca (with more sources coming soon). It is powered by the open-source openmcp server."],
+  ["What is opendata.fyi?", "An open-source MCP server that helps AI assistants discover and query public datasets published through open.canada.ca (with more sources coming soon)."],
   ["What is MCP?", "The Model Context Protocol is an open standard that lets AI applications connect to external tools and data sources."],
   ["Which AI clients can use it?", "Any client that supports MCP servers over standard stdio transport, including Claude, ChatGPT, Codex, Cursor, Gemini CLI, Zed and others."],
   ["Do I need an API key?", "No. It uses public data endpoints and a local embedding model."],
   ["Does it copy all public data to my computer?", "No. The local index contains catalogue metadata and embeddings. Source resources are queried only when needed."],
   ["Is the data official?", "opendata.fyi works with resources published through open.canada.ca (with more sources coming soon) and links results to the source. It is an independent project."],
   ["What data formats are supported?", "CKAN datastore resources plus remote CSV, Parquet, JSON, ZIP, Excel, PDF and TXT resources, subject to each file’s structure."],
-  ["Can I contribute?", "Yes. The underlying openmcp server is MIT licensed. Issues, feedback and contributions are welcome on GitHub."],
+  ["Can I contribute?", "Yes. The opendata.fyi MCP server is MIT licensed. Issues, feedback and contributions are welcome on GitHub."],
 ];
 
 function Arrow() {
@@ -172,7 +172,7 @@ export default function Home() {
       </section>
 
       <div className="stat-strip" aria-label="opendata.fyi statistics">
-        <div><strong>24K+</strong><span>indexed datasets</span></div>
+        <div><strong>Local Index</strong><span>catalogue metadata</span></div>
         <div><strong>Natural Language</strong><span>discovery and analysis</span></div>
         <div><strong>Official Sources</strong><span>results you can trace</span></div>
         <div><strong>No API keys</strong><span>ready to run</span></div>
@@ -196,7 +196,7 @@ export default function Home() {
         </div>
         <div className="steps">
           {[
-            ["Discover", "It searches 24,000+ catalogue entries by meaning and keyword, then ranks the strongest sources."],
+            ["Discover", "It searches catalogue entries by meaning and keyword, then ranks the strongest sources."],
             ["Inspect", "Before touching the data, it checks fields, sheets, formats and date coverage to choose the right resource."],
             ["Query", "It filters at the source when possible and streams CSV, Excel, JSON, ZIP, Parquet or PDF only when needed."],
             ["Cite", "Direct dataset links keep every result traceable and make the original source easy to verify."],
@@ -280,9 +280,9 @@ export default function Home() {
       <section className="privacy">
         <p className="section-kicker">Transparent by design</p>
         <div>
-          <h2>Know what runs locally<br />and what gets sent.</h2>
-          <p>Search embeddings and the catalogue run locally. Requests to retrieve public data go to the relevant source host. Lightweight, asynchronous telemetry helps maintainers understand usage and errors, and can be disabled.</p>
-          <p className="small">Telemetry does not collect names, usernames, authentication keys, local file contents or system paths.</p>
+          <h2>Anonymous usage data.<br /><span>Disable it anytime.</span></h2>
+          <p>Search embeddings and the catalogue run locally. Requests for public data go to the relevant source host. Lightweight telemetry records a temporary session ID, tool name, success or failure, normalized error code, latency, server version and public dataset IDs that are surfaced, inspected or queried.</p>
+          <p className="small">It does not collect raw questions or search queries, SQL, filters, complete URLs, full error messages, file paths or resource contents.</p>
         </div>
       </section>
 
@@ -305,12 +305,12 @@ export default function Home() {
 
       <section className="final-cta">
         <p className="section-kicker">opendata.fyi</p>
-        <h2>Explore<br /></h2>
+        <h2>Find. Build.<br /><span>Share.</span></h2>
         <p>
-          24,000+ public datasets with your favorite AI assistant.
-          <span className="coming-soon">(More sources coming soon.)</span>
+          public data with your favorite AI assistant.
+          <span className="coming-soon">(currently supports open.canada.ca, with more sources coming soon.)</span>
         </p>
-        <a className="button button-dark" href={github} target="_blank" rel="noreferrer">Get openmcp on GitHub <Arrow /></a>
+        <a className="button button-dark" href={github} target="_blank" rel="noreferrer">View source on GitHub <Arrow /></a>
       </section>
 
       <footer>
@@ -327,7 +327,7 @@ export default function Home() {
           <a href="https://open.canada.ca/en/open-data">open.canada.ca</a>
         </div>
         <div className="footer-bottom">
-          <span>© 2026 opendata.fyi · openmcp is MIT licensed</span>
+          <span>© 2026 opendata.fyi · MIT licensed</span>
           <span>Independent and not affiliated with any data publisher.</span>
         </div>
       </footer>
