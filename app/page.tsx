@@ -280,9 +280,9 @@ export default function Home() {
       <section className="privacy">
         <p className="section-kicker">Transparent by design</p>
         <div>
-          <h2>Anonymous usage data.<br /><span>Disable it anytime.</span></h2>
-          <p>Search embeddings and the catalogue run locally. Requests for public data go to the relevant source host. Lightweight telemetry records a temporary session ID, tool name, success or failure, normalized error code, latency, server version and public dataset IDs that are surfaced, inspected or queried.</p>
-          <p className="small">It does not collect raw questions or search queries, SQL, filters, complete URLs, full error messages, file paths or resource contents.</p>
+          <h2>Anonymous usage data.<br /><span>Off by default.</span></h2>
+          <p>Search embeddings and the catalogue run locally. Requests for public data go to the relevant source host. If enabled, lightweight telemetry records a temporary session ID, tool name, success or failure, normalized error code, latency, server version and public dataset IDs that are surfaced, inspected or queried.</p>
+          <p className="small">It does not collect raw questions or search queries, SQL, filters, complete URLs, full error messages, file paths or resource contents. </p>
         </div>
       </section>
 
