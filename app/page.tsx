@@ -280,9 +280,10 @@ export default function Home() {
       <section className="privacy">
         <p className="section-kicker">Transparent by design</p>
         <div>
-          <h2>Anonymous usage data.<br /><span>Off by default.</span></h2>
-          <p>Search embeddings and the catalogue run locally. Requests for public data go to the relevant source host. If enabled, lightweight telemetry records a temporary session ID, tool name, success or failure, normalized error code, latency, server version and public dataset IDs that are surfaced, inspected or queried.</p>
-          <p className="small">It does not collect raw questions or search queries, SQL, filters, complete URLs, full error messages, file paths or resource contents. </p>
+          <h2>Optional telemetry.<br /><span>Off by default.</span></h2>
+          <p>Catalogue search and embeddings run on your machine. Data requests go directly to the source.</p>
+          <p>If you opt in, opendata.fyi records a session ID that lasts for one server run, along with server version, tool names, response times, outcomes, general error types, and the public dataset IDs surfaced, inspected or queried. This helps show which tools and datasets get used, where failures happen, and where performance needs attention.</p>
+          <p className="small">It never records your questions, SQL, filters, complete URLs, detailed errors, file paths or resource contents.</p>
         </div>
       </section>
 
