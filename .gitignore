@@ -22,3 +22,6 @@ yarn-error.log*
 # Environment variables & local configuration
 .env*.local
 .env
+
+# Private analysis workspace (never commit or deploy)
+/analysis/

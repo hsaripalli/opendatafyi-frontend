@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import brandLogo from "../opendata-fyi-original-dots-logo-pack/opendata-logo-original-transparent.png";
+import { SiteFooter } from "./components/SiteFooter";
+import { SiteHeader } from "./components/SiteHeader";
 
 const github = "https://github.com/opendatafyi/openmcp";
 
@@ -103,19 +105,7 @@ export default function Home() {
 
   return (
     <main>
-      <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="opendata.fyi home">
-          <Image className="brand-logo" src={brandLogo} alt="opendata.fyi" priority />
-        </a>
-        <nav aria-label="Main navigation">
-          <a href="#how">How it works</a>
-          <a href="#questions">Examples</a>
-          <a href="#faq">FAQ</a>
-        </nav>
-        <a className="header-cta" href={github} target="_blank" rel="noreferrer">
-          GitHub <Arrow />
-        </a>
-      </header>
+      <SiteHeader />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -314,24 +304,7 @@ export default function Home() {
         <a className="button button-dark" href={github} target="_blank" rel="noreferrer">View source on GitHub <Arrow /></a>
       </section>
 
-      <footer>
-        <div className="footer-brand">
-          <a className="wordmark" href="#top" aria-label="opendata.fyi home">
-            <Image className="brand-logo" src={brandLogo} alt="opendata.fyi" />
-          </a>
-          <p>AI-assisted discovery, querying and analysis for public data.</p>
-        </div>
-        <div className="footer-links">
-          <a href={github}>GitHub</a>
-          <a href={`${github}#quick-start`}>Documentation</a>
-          <a href={`${github}/releases/latest`}>Releases</a>
-          <a href="https://open.canada.ca/en/open-data">open.canada.ca</a>
-        </div>
-        <div className="footer-bottom">
-          <span>© 2026 opendata.fyi · MIT licensed</span>
-          <span>Independent and not affiliated with any data publisher.</span>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }
