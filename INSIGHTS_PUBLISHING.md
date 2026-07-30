@@ -99,10 +99,12 @@ The Insights route is a direct story index:
 - begin the story list immediately below the site header;
 - do not add a landing-page hero, "Latest insights" heading, or explanatory
   subtitle;
+- center the list as a left-aligned `920px` editorial column; do not
+  center-align the story text;
 - number stories sequentially with a red, two-digit label such as `01`;
 - place the number above the story title, not in a separate left-hand column;
-- show the linked title, one concise summary, publication date, and reading
-  time;
+- show the linked title and one concise summary, followed by the publication
+  date and reading time on one compact metadata line;
 - make the title the only story link;
 - do not add "Visual story", "Read story", or similar duplicate labels;
 - do not draw a divider below the final story card.

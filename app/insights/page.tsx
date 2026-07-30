@@ -38,11 +38,8 @@ export default function InsightsPage() {
                   <p>{article.dek}</p>
                 </div>
                 <div className="insight-card-meta">
-                  <span>
-                    {formatDate(article.publishedAt)}
-                    <br />
-                    {article.readingMinutes} min read
-                  </span>
+                  <span>{formatDate(article.publishedAt)}</span>
+                  <span>{article.readingMinutes} min read</span>
                 </div>
               </article>
             ))}

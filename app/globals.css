@@ -254,13 +254,16 @@ footer { background: #fff; color: var(--ink); padding: 70px 4vw 30px; border-top
 
 /* Insights */
 .insights-feed { padding: 62px 4vw 110px; border-bottom: 1px solid var(--line); }
-.insight-card-grid { display: grid; }
-.insight-card {
-  min-height: 220px;
-  padding: 34px 0;
+.insight-card-grid {
+  width: min(920px, 100%);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 170px;
-  gap: 6vw;
+}
+.insight-card {
+  padding: 46px 0 58px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
   border-bottom: 1px solid var(--line);
 }
@@ -273,7 +276,7 @@ footer { background: #fff; color: var(--ink); padding: 70px 4vw 30px; border-top
 }
 .insight-card-copy h2 {
   margin: 0;
-  max-width: 780px;
+  max-width: 900px;
   font-size: clamp(32px, 4vw, 58px);
   font-weight: 500;
   line-height: 1.02;
@@ -290,14 +293,28 @@ footer { background: #fff; color: var(--ink); padding: 70px 4vw 30px; border-top
 }
 .insight-card-meta {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  gap: 22px;
   color: var(--muted);
   font: 10px var(--font-geist-mono), monospace;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
-.insight-card-meta span { line-height: 1.8; }
+.insight-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 22px;
+  line-height: 1.4;
+}
+.insight-card-meta span + span::before {
+  content: "";
+  width: 3px;
+  height: 3px;
+  margin-right: 0;
+  border-radius: 50%;
+  background: var(--red);
+}
 
 /* Published insight */
 .article-hero {
@@ -789,13 +806,13 @@ footer { background: #fff; color: var(--ink); padding: 70px 4vw 30px; border-top
   .insights-feed { padding: 72px 5vw; }
   .insight-card {
     min-height: 0;
-    padding: 24px 0;
+    padding: 28px 0 38px;
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 24px;
   }
   .insight-card-copy h2 { font-size: clamp(34px, 10vw, 44px); }
   .insight-card-copy > p:not(.insight-card-label) { margin-top: 22px; }
-  .insight-card-meta { flex-direction: row; align-items: flex-end; }
+  .insight-card-meta { flex-direction: row; align-items: center; }
   .article-hero { padding: 36px 5vw 54px; }
   .article-back { margin-bottom: 62px; }
   .article-hero h1 { font-size: clamp(44px, 13vw, 58px); }
