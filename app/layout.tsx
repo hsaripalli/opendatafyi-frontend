@@ -20,9 +20,14 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.opendata.fyi"),
   title: "opendata.fyi — Explore open data",
   description: "Explore open data.",
+  authors: [{ name: "opendata.fyi", url: "https://www.opendata.fyi" }],
+  creator: "opendata.fyi",
+  publisher: "opendata.fyi",
   openGraph: {
     title: "opendata.fyi — Explore open data",
     description: "Explore open data.",
+    siteName: "opendata.fyi",
+    locale: "en_CA",
     type: "website",
   },
   other: {

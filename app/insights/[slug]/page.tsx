@@ -31,8 +31,8 @@ export async function generateMetadata({
     ? [
         {
           url: article.socialImage,
-          width: 1200,
-          height: 627,
+          width: 2400,
+          height: 1254,
           alt: article.title,
         },
       ]
@@ -41,6 +41,9 @@ export async function generateMetadata({
   return {
     title: `${article.title} — opendata.fyi`,
     description: article.dek,
+    authors: [{ name: "opendata.fyi", url: "https://www.opendata.fyi" }],
+    creator: "opendata.fyi",
+    publisher: "opendata.fyi",
     alternates: {
       canonical: canonicalPath,
     },
@@ -48,7 +51,10 @@ export async function generateMetadata({
       title: article.title,
       description: article.dek,
       url: canonicalPath,
+      siteName: "opendata.fyi",
+      locale: "en_CA",
       type: "article",
+      authors: ["https://www.opendata.fyi"],
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
       images: socialImages,

@@ -195,16 +195,34 @@ the finding clearly.
 
 Every published Insight should have an article-specific Open Graph image:
 
-- render a static PNG at `1200 × 627px` and keep it below `5 MB`;
-- place it at `public/insights/<article-slug>-og.png`;
+- design at `1200 × 627px`, export the PNG at 2× (`2400 × 1254px`), and keep
+  it below `5 MB`;
+- place the first version at `public/insights/<article-slug>-og.png`;
 - use the exact published values rather than an AI-generated approximation;
 - simplify the article's main visual so it remains legible at feed-preview
   size;
 - include the opendata.fyi wordmark, article headline, primary finding, chart,
   time period, units, and a short source line;
 - set the article's `socialImage` field to the public image path;
-- provide `og:image`, canonical URL, and `summary_large_image` metadata;
-- after deployment, verify the public article URL with LinkedIn Post Inspector.
+- provide an absolute HTTPS canonical URL, `og:image`, `og:image:width`,
+  `og:image:height`, `og:image:alt`, and `summary_large_image` metadata;
+- identify the source with `author`, `creator`, `publisher`, `og:site_name`, and
+  `article:author` metadata so social crawlers do not report "author not
+  found";
+- never test with a localhost URL because social crawlers cannot access it;
+- inspect the exported PNG at full resolution before publishing and confirm
+  that its headline, chart labels, and values are sharp and legible;
+- after deployment, confirm the image URL returns `200` with an `image/png`
+  content type and confirm the public article HTML contains the absolute image
+  URL;
+- verify the public article URL with LinkedIn Post Inspector before creating
+  the post.
+
+LinkedIn caches preview images. When correcting an image that has already been
+scraped, export a new version such as `<article-slug>-og-v2.png` and update the
+article's `socialImage` path. Do not rely only on overwriting the old file at
+the same URL. Run the new article URL through Post Inspector; refreshed
+metadata affects new LinkedIn posts, not posts that already exist.
 
 The social image is a preview, not a replacement for the full article chart.
 
