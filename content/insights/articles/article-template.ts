@@ -17,6 +17,7 @@ export const articleTemplate: InsightArticle = {
   kicker: "Topic · Geography · Time period",
   title: "A clear, specific finding belongs here.",
   dek: "One or two sentences that explain what was measured, why it matters, and the scope of the analysis.",
+  socialImage: "/insights/replace-with-article-slug-og.png",
   publishedAt: "2026-07-30",
   readingMinutes: 6,
   methodology:

@@ -109,6 +109,7 @@ export type InsightArticle = {
   kicker: string;
   title: string;
   dek: string;
+  socialImage?: string;
   publishedAt: string;
   updatedAt?: string;
   readingMinutes: number;

@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.opendata.fyi"),
   title: "opendata.fyi — Explore open data",
   description: "Explore open data.",
   openGraph: {

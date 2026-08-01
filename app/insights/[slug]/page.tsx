@@ -26,15 +26,38 @@ export async function generateMetadata({
     return {};
   }
 
+  const canonicalPath = `/insights/${article.slug}`;
+  const socialImages = article.socialImage
+    ? [
+        {
+          url: article.socialImage,
+          width: 1200,
+          height: 627,
+          alt: article.title,
+        },
+      ]
+    : undefined;
+
   return {
     title: `${article.title} — opendata.fyi`,
     description: article.dek,
+    alternates: {
+      canonical: canonicalPath,
+    },
     openGraph: {
       title: article.title,
       description: article.dek,
+      url: canonicalPath,
       type: "article",
       publishedTime: article.publishedAt,
       modifiedTime: article.updatedAt,
+      images: socialImages,
+    },
+    twitter: {
+      card: article.socialImage ? "summary_large_image" : "summary",
+      title: article.title,
+      description: article.dek,
+      images: article.socialImage ? [article.socialImage] : undefined,
     },
   };
 }

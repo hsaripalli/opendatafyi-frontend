@@ -81,11 +81,12 @@ Those numbers are the publication output, not the source dataset.
 7. Transfer the approved values and narrative into the article file.
 8. Check every displayed number against the private calculation and confirm
    units, rounding, time windows, and comparison bases.
-9. Keep the article as `draft` through editorial, visual, responsive, and
+9. Create and verify the article's social-preview image.
+10. Keep the article as `draft` through editorial, visual, responsive, and
    number review.
-10. Add it to `content/insights/index.ts`, change it to `published`, and run
+11. Add it to `content/insights/index.ts`, change it to `published`, and run
     `npm run build`.
-11. Confirm that the index and article routes are statically generated and
+12. Confirm that the index and article routes are statically generated and
     that no file from `analysis/` is present in the frontend or build output.
 
 Never import the private analysis directory into the frontend. This keeps the
@@ -190,6 +191,23 @@ Use the existing typed chart components. Add a new chart type only when the
 current bar, stacked-bar, grouped-bar, or line components cannot communicate
 the finding clearly.
 
+## Social preview
+
+Every published Insight should have an article-specific Open Graph image:
+
+- render a static PNG at `1200 × 627px` and keep it below `5 MB`;
+- place it at `public/insights/<article-slug>-og.png`;
+- use the exact published values rather than an AI-generated approximation;
+- simplify the article's main visual so it remains legible at feed-preview
+  size;
+- include the opendata.fyi wordmark, article headline, primary finding, chart,
+  time period, units, and a short source line;
+- set the article's `socialImage` field to the public image path;
+- provide `og:image`, canonical URL, and `summary_large_image` metadata;
+- after deployment, verify the public article URL with LinkedIn Post Inspector.
+
+The social image is a preview, not a replacement for the full article chart.
+
 ## Methodology and attribution
 
 Write methodology in neutral, reproducible language. Do not say "we
@@ -224,6 +242,7 @@ Every published article must include:
 - official dataset title, publisher, URL, and access date;
 - accessible chart descriptions and presentation-ready display values;
 - responsive charts that fit phone and tablet viewports;
+- an exact, legible social-preview image;
 - a successful production build.
 
 Numbers and chart series included in article files are public. Raw source rows,
