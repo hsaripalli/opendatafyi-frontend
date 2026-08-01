@@ -1,51 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627">
   <rect width="1200" height="627" fill="#ffffff"/>
-  <circle cx="1100" cy="55" r="240" fill="#e33a31" opacity="0.045"/>
-  <circle cx="875" cy="640" r="260" fill="#697680" opacity="0.055"/>
+  <circle cx="1110" cy="25" r="250" fill="#e33a31" opacity="0.045"/>
+  <circle cx="920" cy="680" r="275" fill="#697680" opacity="0.055"/>
 
-  <text x="1136" y="78" fill="#e33a31" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" letter-spacing="2.2" text-anchor="end">INSIGHT 01</text>
+  <text x="1136" y="78" fill="#e33a31" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" letter-spacing="2.4" text-anchor="end">INSIGHT 01</text>
   <line x1="64" y1="116" x2="1136" y2="116" stroke="#deded9"/>
 
-  <text x="64" y="205" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="54" font-weight="500" letter-spacing="-2.8">
+  <text x="64" y="218" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="56" font-weight="500" letter-spacing="-2.8">
     <tspan x="64" dy="0">Hydrocarbons power</tspan>
-    <tspan x="64" dy="57">Canada’s energy</tspan>
-    <tspan x="64" dy="57">expansion.</tspan>
+    <tspan x="64" dy="59">Canada’s energy</tspan>
+    <tspan x="64" dy="59">expansion.</tspan>
   </text>
-  <text x="66" y="408" fill="#686868" font-family="Arial, Helvetica, sans-serif" font-size="18">Primary energy production · 2020–2025</text>
-  <text x="64" y="482" fill="#e33a31" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="500" letter-spacing="-2">+17%</text>
-  <text x="211" y="477" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700">TOTAL PRODUCTION</text>
-  <text x="211" y="502" fill="#686868" font-family="Arial, Helvetica, sans-serif" font-size="14">Measured by energy content</text>
 
-  <line x1="644" y1="154" x2="644" y2="530" stroke="#deded9"/>
-  <line x1="700" y1="500" x2="1136" y2="500" stroke="#121212"/>
-  <line x1="700" y1="388" x2="1136" y2="388" stroke="#deded9"/>
-  <line x1="700" y1="276" x2="1136" y2="276" stroke="#deded9"/>
+  <text x="64" y="500" fill="#e33a31" font-family="Arial, Helvetica, sans-serif" font-size="94" font-weight="500" letter-spacing="-3">+17%</text>
+  <text x="325" y="474" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">PRIMARY ENERGY</text>
+  <text x="325" y="509" fill="#4f4f4b" font-family="Arial, Helvetica, sans-serif" font-size="25">2020 → 2025</text>
+
+  <line x1="632" y1="154" x2="632" y2="548" stroke="#deded9"/>
+  <line x1="684" y1="500" x2="1136" y2="500" stroke="#121212" stroke-width="2"/>
 
   <!-- 2020: 20,920 PJ -->
-  <rect x="742" y="385.6" width="142" height="114.4" fill="#e33a31"/>
-  <rect x="742" y="309.5" width="142" height="76.1" fill="#252525"/>
-  <rect x="742" y="297.0" width="142" height="12.5" fill="#697680"/>
-  <rect x="742" y="287.0" width="142" height="10.0" fill="#9aabb8"/>
-  <rect x="742" y="266.3" width="142" height="20.7" fill="#b9ac91"/>
-  <rect x="742" y="265.7" width="142" height="0.6" fill="#d6d6d0"/>
-  <text x="813" y="225" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" text-anchor="middle">20,920 PJ</text>
-  <text x="813" y="533" fill="#4f4f4b" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="middle">2020</text>
+  <rect x="710" y="385.6" width="164" height="114.4" fill="#e33a31"/>
+  <rect x="710" y="309.5" width="164" height="76.1" fill="#252525"/>
+  <rect x="710" y="297.0" width="164" height="12.5" fill="#697680"/>
+  <rect x="710" y="287.0" width="164" height="10.0" fill="#9aabb8"/>
+  <rect x="710" y="266.3" width="164" height="20.7" fill="#b9ac91"/>
+  <rect x="710" y="265.7" width="164" height="0.6" fill="#d6d6d0"/>
+  <text x="792" y="225" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" text-anchor="middle">20,920</text>
+  <text x="792" y="258" fill="#4f4f4b" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">PJ</text>
+  <text x="792" y="548" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="middle">2020</text>
 
   <!-- 2025: 24,482 PJ -->
-  <rect x="964" y="362.9" width="142" height="137.1" fill="#e33a31"/>
-  <rect x="964" y="270.5" width="142" height="92.4" fill="#252525"/>
-  <rect x="964" y="258.5" width="142" height="12.0" fill="#697680"/>
-  <rect x="964" y="246.1" width="142" height="12.4" fill="#9aabb8"/>
-  <rect x="964" y="226.7" width="142" height="19.4" fill="#b9ac91"/>
-  <rect x="964" y="225.8" width="142" height="0.9" fill="#d6d6d0"/>
-  <text x="1035" y="184" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" text-anchor="middle">24,482 PJ</text>
-  <text x="1035" y="533" fill="#4f4f4b" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" text-anchor="middle">2025</text>
-
-  <g font-family="Arial, Helvetica, sans-serif" font-size="17" fill="#4f4f4b">
-    <rect x="724" y="560" width="14" height="14" fill="#e33a31"/><text x="748" y="573">Crude oil</text>
-    <rect x="850" y="560" width="14" height="14" fill="#252525"/><text x="874" y="573">Natural gas</text>
-    <rect x="1002" y="560" width="14" height="14" fill="#9aabb8"/><text x="1026" y="573">Other fuels</text>
-  </g>
-
-  <text x="64" y="586" fill="#686868" font-family="Arial, Helvetica, sans-serif" font-size="12">Statistics Canada · Table 25-10-0079-01</text>
+  <rect x="946" y="362.9" width="164" height="137.1" fill="#e33a31"/>
+  <rect x="946" y="270.5" width="164" height="92.4" fill="#252525"/>
+  <rect x="946" y="258.5" width="164" height="12.0" fill="#697680"/>
+  <rect x="946" y="246.1" width="164" height="12.4" fill="#9aabb8"/>
+  <rect x="946" y="226.7" width="164" height="19.4" fill="#b9ac91"/>
+  <rect x="946" y="225.8" width="164" height="0.9" fill="#d6d6d0"/>
+  <text x="1028" y="176" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="700" text-anchor="middle">24,482</text>
+  <text x="1028" y="209" fill="#4f4f4b" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" text-anchor="middle">PJ</text>
+  <text x="1028" y="548" fill="#121212" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="middle">2025</text>
 </svg>

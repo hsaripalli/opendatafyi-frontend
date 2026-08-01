@@ -31,7 +31,7 @@ export const canadaEnergyBalance: InsightArticle = {
   kicker: "Canada · January 2020–April 2026",
   title: "Hydrocarbons power Canada’s energy expansion.",
   dek: "Primary energy production rose 17% from 2020 to 2025. Hydrocarbons supplied 103.7% of the net increase, while Canada’s net energy exports widened 26%.",
-  socialImage: "/insights/canada-energy-balance-2020-2026-og-v3.png",
+  socialImage: "/insights/canada-energy-balance-2020-2026-og-v4.png",
   publishedAt: "2026-07-30",
   readingMinutes: 8,
   methodology:

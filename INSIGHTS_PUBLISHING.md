@@ -204,6 +204,10 @@ Every published Insight should have an article-specific Open Graph image:
 - set key chart values at no less than `30px` on the 1200 × 627 design canvas;
   if values are unclear in a roughly 550px-wide preview, simplify the chart
   rather than increasing image resolution again;
+- test a `300 × 157px` downsample before publishing; the headline, primary
+  metric, comparison totals, and years must remain readable at that size;
+- omit legends, source lines, chart subtitles, and secondary annotations from
+  the card when they compete with the primary numbers;
 - include the opendata.fyi wordmark, article headline, primary finding, chart,
   time period, units, and a short source line;
 - set the article's `socialImage` field to the public image path;
