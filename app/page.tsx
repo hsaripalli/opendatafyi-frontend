@@ -9,30 +9,53 @@ import { SiteHeader } from "./components/SiteHeader";
 const github = "https://github.com/opendatafyi/openmcp";
 
 const prompts = [
-  "How have rental prices changed across major cities?",
-  "How has Canada’s electricity generation mix changed over time?",
-  "Compare population growth across provinces.",
-  "What do federal datasets show about food price inflation?",
-  "Find recent data on greenhouse gas emissions by sector.",
-  "Which neighbourhoods in Toronto report the worst air quality?",
+  "How has Alberta’s electricity generation mix changed over time?",
+  "How do asking rents compare across major Canadian cities?",
+  "How have hospital and ICU admissions changed across Ontario regions?",
+  "Where is public infrastructure funding being spent across Canada?",
+  "Which provinces had the fastest population growth over the past decade?",
+  "How has wildfire smoke affected air quality in Alberta?",
 ];
 
 const workflowQuestion = "How do interest rates affect housing prices in Canada?";
 const workflowSteps = [
-  ["Searching the catalogue", "24,000+ datasets"],
+  ["Searching the catalogue", "75,000 datasets"],
   ["Comparing relevant sources", "12 candidates"],
   ["Querying source data", "3 datasets"],
   ["Generating chart", "Chart ready"],
 ] as const;
 const workflowLines = [workflowQuestion, ...workflowSteps.map(([label]) => label)];
 
+const dataSources = [
+  {
+    name: "Government of Canada",
+    domain: "open.canada.ca",
+    href: "https://open.canada.ca/en/open-data",
+  },
+  {
+    name: "Alberta Open Data",
+    domain: "open.alberta.ca",
+    href: "https://open.alberta.ca",
+  },
+  {
+    name: "Ontario Open Data",
+    domain: "data.ontario.ca",
+    href: "https://data.ontario.ca",
+  },
+  {
+    name: "Statistics Canada",
+    domain: "statcan.gc.ca",
+    href: "https://www.statcan.gc.ca/en/developers/wds",
+  },
+] as const;
+
 const faq = [
-  ["What is opendata.fyi?", "An open-source MCP server that helps AI assistants discover and query public datasets published through open.canada.ca (with more sources coming soon)."],
+  ["What is opendata.fyi?", "An open-source MCP server that helps AI assistants discover and query Canadian public data across federal, Alberta, Ontario and Statistics Canada sources."],
   ["What is MCP?", "The Model Context Protocol is an open standard that lets AI applications connect to external tools and data sources."],
   ["Which AI clients can use it?", "Any client that supports MCP servers over standard stdio transport, including Claude, ChatGPT, Codex, Cursor, Gemini CLI, Zed and others."],
   ["Do I need an API key?", "No. It uses public data endpoints and a local embedding model."],
   ["Does it copy all public data to my computer?", "No. The local index contains catalogue metadata and embeddings. Source resources are queried only when needed."],
-  ["Is the data official?", "opendata.fyi works with resources published through open.canada.ca (with more sources coming soon) and links results to the source. It is an independent project."],
+  ["Is the data official?", "opendata.fyi works with resources published through open.canada.ca, open.alberta.ca, data.ontario.ca and Statistics Canada, and links every result to its source. It is an independent project."],
   ["What data formats are supported?", "CKAN datastore resources plus remote CSV, Parquet, JSON, ZIP, Excel, PDF and TXT resources, subject to each file’s structure."],
   ["Can I contribute?", "Yes. The opendata.fyi MCP server is MIT licensed. Issues, feedback and contributions are welcome on GitHub."],
 ];
@@ -97,6 +120,18 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [showWorkflowSource, workflowChar, workflowLine]);
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setActivePrompt((value) => (value + 1) % prompts.length);
+    }, 7500);
+
+    return () => window.clearTimeout(timer);
+  }, [activePrompt]);
+
+  const selectPrompt = (index: number) => {
+    setActivePrompt(index);
+  };
+
   const typedWorkflowLine = (index: number) => {
     if (index < workflowLine) return workflowLines[index];
     if (index === workflowLine) return workflowLines[index].slice(0, workflowChar);
@@ -112,8 +147,9 @@ export default function Home() {
           <p className="eyebrow"><i />A context layer for Canadian public data</p>
           <h1>Explore<br /><span>open data.</span></h1>
           <p className="lede">
-            Connect your AI assistant to 24,000+ public datasets. Find the right
-            sources, query the data, and build charts, visuals,
+            Connect your AI assistant to 75,000 public datasets and statistical
+            tables from Government of Canada, Statistics Canada, Alberta and Ontario sources.
+            Find the right sources, query the data, and build charts, visuals,
             reports and stories—all traceable to the official source.
           </p>
           <div className="actions">
@@ -162,9 +198,9 @@ export default function Home() {
       </section>
 
       <div className="stat-strip" aria-label="opendata.fyi statistics">
-        <div><strong>Local Index</strong><span>catalogue metadata</span></div>
-        <div><strong>Natural Language</strong><span>discovery and analysis</span></div>
-        <div><strong>Official Sources</strong><span>results you can trace</span></div>
+        <div><strong>Local Index</strong><span>75,000 · catalogue metadata</span></div>
+        <div><strong>Natural Language</strong><span>12 MCP tools · discovery and analysis</span></div>
+        <div><strong>Official Sources</strong><span>4 catalogues · results you can trace</span></div>
         <div><strong>No API keys</strong><span>ready to run</span></div>
       </div>
 
@@ -204,41 +240,69 @@ export default function Home() {
         <div className="section-head question-head">
           <p className="section-kicker">What could you ask?</p>
           <h2>Follow your curiosity.</h2>
-          <p>A few sample questions to get started.</p>
         </div>
-        <div className="prompt-showcase">
-          <div className="prompt-counter">
-            <span>Sample question</span>
-            <span>{String(activePrompt + 1).padStart(2, "0")} / {String(prompts.length).padStart(2, "0")}</span>
-          </div>
-          <p className="showcase-question">“{prompts[activePrompt]}”</p>
-          <div className="showcase-controls">
-            <button
-              type="button"
-              onClick={() => setActivePrompt((activePrompt - 1 + prompts.length) % prompts.length)}
-              aria-label="Previous sample question"
-            >
-              ← Previous
-            </button>
-            <div className="prompt-dots" aria-label="Choose a sample question">
-              {prompts.map((item, index) => (
-                <button
-                  type="button"
-                  className={activePrompt === index ? "active" : ""}
-                  onClick={() => setActivePrompt(index)}
-                  aria-label={`Show sample question ${index + 1}: ${item}`}
-                  aria-current={activePrompt === index ? "true" : undefined}
-                  key={item}
-                />
+        <div className="curiosity-layout">
+          <div className="sources" id="sources">
+            <div className="source-section-label">
+              <span>75,000 datasets and statistical tables</span>
+            </div>
+            <div className="source-grid">
+              {dataSources.map((source, index) => (
+                <a
+                  className="source-card"
+                  href={source.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  key={source.name}
+                >
+                  <span className="source-index">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{source.name}</h3>
+                  <span className="source-domain">{source.domain} <Arrow /></span>
+                </a>
               ))}
             </div>
-            <button
-              type="button"
-              onClick={() => setActivePrompt((activePrompt + 1) % prompts.length)}
-              aria-label="Next sample question"
+          </div>
+          <div className="prompt-showcase">
+            <div className="prompt-counter">
+              <span>Sample question</span>
+              <span>{String(activePrompt + 1).padStart(2, "0")} / {String(prompts.length).padStart(2, "0")}</span>
+            </div>
+            <p
+              className="showcase-question"
+              key={activePrompt}
+              aria-label={prompts[activePrompt]}
+              aria-live="polite"
             >
-              Next →
-            </button>
+              “{prompts[activePrompt]}”
+            </p>
+            <div className="showcase-controls">
+              <button
+                type="button"
+                onClick={() => selectPrompt((activePrompt - 1 + prompts.length) % prompts.length)}
+                aria-label="Previous sample question"
+              >
+                ← Previous
+              </button>
+              <div className="prompt-dots" aria-label="Choose a sample question">
+                {prompts.map((item, index) => (
+                  <button
+                    type="button"
+                    className={activePrompt === index ? "active" : ""}
+                    onClick={() => selectPrompt(index)}
+                    aria-label={`Show sample question ${index + 1}: ${item}`}
+                    aria-current={activePrompt === index ? "true" : undefined}
+                    key={item}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => selectPrompt((activePrompt + 1) % prompts.length)}
+                aria-label="Next sample question"
+              >
+                Next →
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -247,8 +311,8 @@ export default function Home() {
         <p className="section-kicker">Under the hood</p>
         <div className="technical-copy">
           <h2>Open-source<br /><span>MCP server.</span></h2>
-          <p>opendata.fyi builds a semantic index by encoding dataset metadata into 384-dimensional vectors with bge-small-en-v1.5 and storing them in a DuckDB database. For every query, it runs a hybrid search: local semantic search in DuckDB alongside CKAN’s live package_search API. Results are merged using Reciprocal Rank Fusion (RRF) to rank the most relevant datasets.</p>
-          <p>For retrieval, the server routes queries through the most efficient read-only execution path. Datastore-backed tables are filtered server-side through CKAN, while remote files are queried with DuckDB or handled with format-specific readers. Only targeted results are returned to your MCP client for downstream analysis, visualization and synthesis.</p>
+          <p>opendata.fyi encodes metadata from Canada, Alberta, Ontario and the complete Statistics Canada WDS table inventory into 384-dimensional vectors stored in DuckDB. Each question runs against that shared semantic index while the three CKAN catalogues are searched live. Reciprocal Rank Fusion combines those signals into one ranked result set.</p>
+          <p>For retrieval, the server chooses the most efficient read-only path. CKAN datastores are filtered server-side, remote files are queried with DuckDB, and the StatCan WDS tool retrieves table metadata, vectors, coordinates and bounded time-series data directly from the official API.</p>
         </div>
       </section>
 
@@ -299,7 +363,7 @@ export default function Home() {
         <h2>Find. Build.<br /><span>Share.</span></h2>
         <p>
           public data with your favorite AI assistant.
-          <span className="coming-soon">(currently supports open.canada.ca, with more sources coming soon.)</span>
+          <span className="coming-soon">Federal, Alberta, Ontario and Statistics Canada sources—one traceable workflow.</span>
         </p>
         <a className="button button-dark" href={github} target="_blank" rel="noreferrer">View source on GitHub <Arrow /></a>
       </section>

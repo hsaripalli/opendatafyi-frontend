@@ -18,20 +18,29 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.opendata.fyi"),
-  title: "opendata.fyi — Explore open data",
-  description: "Explore open data.",
+  title: "opendata.fyi — Explore Canadian public data",
+  description: "Search and query 75,000 official datasets and statistical tables from Canada, Alberta, Ontario and Statistics Canada with your AI assistant.",
   authors: [{ name: "opendata.fyi", url: "https://www.opendata.fyi" }],
   creator: "opendata.fyi",
   publisher: "opendata.fyi",
   openGraph: {
-    title: "opendata.fyi — Explore open data",
-    description: "Explore open data.",
+    title: "opendata.fyi — Explore Canadian public data",
+    description: "Search and query 75,000 official datasets and statistical tables from Canada, Alberta, Ontario and Statistics Canada.",
     siteName: "opendata.fyi",
     locale: "en_CA",
     type: "website",
+    images: [{
+      url: "https://www.opendata.fyi/og.png",
+      width: 1200,
+      height: 630,
+      alt: "opendata.fyi — One question. Four catalogues.",
+    }],
   },
-  other: {
-    "codex-preview": "development",
+  twitter: {
+    card: "summary_large_image",
+    title: "opendata.fyi — Explore Canadian public data",
+    description: "Search and query 75,000 official datasets and statistical tables from Canada, Alberta, Ontario and Statistics Canada.",
+    images: ["https://www.opendata.fyi/og.png"],
   },
   icons: {
     icon: [

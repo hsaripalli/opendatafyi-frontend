@@ -18,6 +18,7 @@ export function SiteHeader({ current }: { current?: "insights" }) {
         <Image className="brand-logo" src={brandLogo} alt="opendata.fyi" priority />
       </a>
       <nav className="primary-nav" aria-label="Main navigation">
+        <a href="/#sources">Sources</a>
         <a href="/#how">How it works</a>
         <a href="/#questions">Examples</a>
         <a href="/#faq">FAQ</a>
@@ -43,6 +44,7 @@ export function SiteHeader({ current }: { current?: "insights" }) {
         <details className="mobile-nav">
           <summary>Menu</summary>
           <div className="mobile-nav-panel">
+            <a href="/#sources">Sources</a>
             <a href="/#how">How it works</a>
             <a href="/#questions">Examples</a>
             <a href="/#faq">FAQ</a>

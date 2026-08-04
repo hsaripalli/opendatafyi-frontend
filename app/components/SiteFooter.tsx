@@ -17,7 +17,7 @@ export function SiteFooter() {
         <a href={github}>GitHub</a>
         <a href={`${github}#quick-start`}>Documentation</a>
         <a href={`${github}/releases/latest`}>Releases</a>
-        <a href="https://open.canada.ca/en/open-data">open.canada.ca</a>
+        <a href="mailto:info@opendata.fyi">info@opendata.fyi</a>
       </div>
       <div className="footer-bottom">
         <span>© 2026 opendata.fyi · MIT licensed</span>
